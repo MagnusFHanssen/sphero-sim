@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://textures/hardwood_normal.jpg" type="Texture" id=1]
+[ext_resource path="res://textures/hardwood.jpg" type="Texture" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://SpheroBolt.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SpheroCamera.gd" type="Script" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 40, 1, 40 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 80, 2, 80 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 1 )
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 0.8
+uv1_scale = Vector3( 25, 25, 25 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.795505, -0.565799, 0.216895, 0, 0.357944, 0.933743, -0.605947, -0.742797, 0.284747, 22.019, 56.7446, 21.3398 )
+
+[node name="SpheroBolt" parent="." instance=ExtResource( 4 )]
+
+[node name="SpheroCamera" type="Camera" parent="."]
+transform = Transform( 0.988025, 0.0176979, 0.153273, -0.127505, 0.653037, 0.746515, -0.0868813, -0.757119, 0.647474, 1.28785, 32.9882, 53.1368 )
+fov = 50.0
+far = 500.0
+script = ExtResource( 6 )
