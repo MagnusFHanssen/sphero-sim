@@ -1,16 +1,18 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://textures/hardwood_normal.jpg" type="Texture" id=1]
 [ext_resource path="res://textures/hardwood.jpg" type="Texture" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://SpheroBolt.tscn" type="PackedScene" id=4]
+[ext_resource path="res://CollisionFlag.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SpheroCamera.gd" type="Script" id=6]
+[ext_resource path="res://HullFlag.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 40, 1, 40 )
+extents = Vector3( 100, 1, 100 )
 
 [sub_resource type="CubeMesh" id=2]
-size = Vector3( 80, 2, 80 )
+size = Vector3( 200, 2, 200 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 2 )
@@ -20,10 +22,12 @@ normal_texture = ExtResource( 1 )
 clearcoat_enabled = true
 clearcoat = 1.0
 clearcoat_gloss = 0.8
-uv1_scale = Vector3( 25, 25, 25 )
+uv1_scale = Vector3( 60, 60, 60 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
+flag_scene = ExtResource( 5 )
+hull_scene = ExtResource( 7 )
 
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -41,7 +45,11 @@ transform = Transform( 0.795505, -0.565799, 0.216895, 0, 0.357944, 0.933743, -0.
 [node name="SpheroBolt" parent="." instance=ExtResource( 4 )]
 
 [node name="SpheroCamera" type="Camera" parent="."]
-transform = Transform( 0.988025, 0.0176979, 0.153273, -0.127505, 0.653037, 0.746515, -0.0868813, -0.757119, 0.647474, 1.28785, 32.9882, 53.1368 )
+transform = Transform( 0.988025, 0.0176979, 0.153273, -0.127505, 0.653037, 0.746515, -0.0868813, -0.757119, 0.647474, -45.592, 63.931, 64.7214 )
 fov = 50.0
 far = 500.0
 script = ExtResource( 6 )
+
+[node name="DrawHull" type="ImmediateGeometry" parent="."]
+
+[connection signal="hull_formed" from="SpheroBolt" to="." method="_on_SpheroBolt_hull_formed"]
