@@ -40,7 +40,7 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.795505, -0.565799, 0.216895, 0, 0.357944, 0.933743, -0.605947, -0.742797, 0.284747, 22.019, 56.7446, 21.3398 )
+transform = Transform( -0.252902, 0.89843, 0.358977, 0.386676, -0.246255, 0.88873, 0.886861, 0.363569, -0.285123, 44.8063, 85.2888, -28.8513 )
 
 [node name="SpheroBolt" parent="." instance=ExtResource( 4 )]
 
